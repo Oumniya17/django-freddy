@@ -1,0 +1,32 @@
+{% extends 'freddyapp/base.html' %}
+
+{% block content %}
+<!-- Detalles individuales de un animatrónico -->
+<h2>{{ animatronic.name }}</h2>
+
+<p><strong>Animal:</strong> {{ animatronic.get_animal_display }}</p>
+<p><strong>Build date:</strong> {{ animatronic.build_date }}</p>
+<p><strong>Decommissioned:</strong> {{ animatronic.decommissioned }}</p>
+
+<!-- Lista de fiestas asociadas -->
+<p><strong>Parties:</strong></p>
+<ul>
+    {% for party in animatronic.parties.all %}
+        <li>{{ party.name }} ({{ party.attendants }} attendants)</li>
+    {% empty %}
+        <li>No parties</li>
+    {% endfor %}
+</ul>
+
+<!-- Opciones de edición si tiene permisos -->
+{% if user.has_perm('freddyapp.change_animatronic') %}
+    <a href="{% url 'animatronic_edit' animatronic.id %}">Edit</a>
+{% endif %}
+
+{% if user.has_perm('freddyapp.delete_animatronic') %}
+    <a href="{% url 'animatronic_delete' animatronic.id %}">Delete</a>
+{% endif %}
+
+<br><br>
+<a href="{% url 'animatronic_list' %}">Back to list</a>
+{% endblock %}

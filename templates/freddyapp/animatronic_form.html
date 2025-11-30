@@ -1,0 +1,18 @@
+{% extends 'freddyapp/base.html' %}
+
+{% block content %}
+<!-- Formulario de creación o edición de un animatrónico -->
+<h2>{{ title }}</h2>
+
+<form method="post">
+    {% csrf_token %}
+
+    <!-- Renderiza todos los campos del formulario -->
+    {{ form.as_p }}
+
+    <button type="submit">Save</button>
+</form>
+
+<br>
+<a href="{% url 'animatronic_list' %}">Back to list</a>
+{% endblock %}

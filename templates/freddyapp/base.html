@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Freddy Fazbear's Pizza</title>
+
+    <!-- Estilos generales del sitio -->
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 40px;
+            padding: 0;
+
+            /* Fondo según cookie "theme" (dark/light) */
+            background-color: {% if request.COOKIES.theme == 'dark' %}#222{% else %}#ffffff{% endif %};
+
+            /* Color del texto según theme */
+            color: {% if request.COOKIES.theme == 'dark' %}#f2f2f2{% else %}#000{% endif %};
+        }
+
+        /* Estilo de enlaces */
+        a {
+            color: #4a00e0;
+            text-decoration: none;
+            margin-right: 12px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        hr {
+            margin-top: 15px;
+            margin-bottom: 25px;
+        }
+
+        /* Títulos principales */
+        h1, h2 {
+            font-weight: bold;
+        }
+
+        /* Lista visualmente más grande */
+        ul li {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        /* Barra superior */
+        .top-bar {
+            margin-bottom: 10px;
+        }
+
+        /* Botón de logout */
+        button {
+            background-color: #4a00e0;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 15px;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #3700b3;
+        }
+    </style>
+
+</head>
+<body>
+
+<!-- Barra superior con selector de tema y login/logout -->
+<div class="top-bar">
+
+    <!-- Enlaces para activar/desactivar tema oscuro -->
+    <a href="{% url 'set_dark_theme' %}">Dark theme</a>
+    <a href="{% url 'clear_theme' %}">Light theme</a>
+
+    <!-- Mostrar opciones según si el usuario está logueado o no -->
+    {% if user.is_authenticated %}
+
+        <!-- Mostrar nombre del usuario -->
+        <span style="margin-right: 8px;">Hi, {{ user.username }}</span>
+
+        <!-- Formulario de cierre de sesión -->
+        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+
+    {% else %}
+
+        <!-- Enlaces para registrarse o iniciar sesión -->
+        <a href="{% url 'register' %}">Register</a>
+        <a href="{% url 'login' %}">Log in</a>
+
+    {% endif %}
+</div>
+
+<hr>
+
+<!-- Aquí se carga el contenido de cada página -->
+{% block content %}
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+{% extends 'freddyapp/base.html' %}
+
+{% block content %}
+<!-- Página principal: lista de animatrónicos -->
+<h1>Welcome to Freddy Fazbear's Pizza</h1>
+
+<ul>
+    {% for anim in animatronics %}
+        <li>
+            {{ anim.name }}
+
+            <!-- Enlace para ver detalles (requiere login) -->
+            [<a href="{% url 'animatronic_view' anim.id %}">View</a>]
+
+            <!-- Mostrar Edit/Delete solo si el usuario tiene permisos -->
+            {% if user.has_perm('freddyapp.change_animatronic') %}
+                [<a href="{% url 'animatronic_edit' anim.id %}">Edit</a>]
+            {% endif %}
+
+            {% if user.has_perm('freddyapp.delete_animatronic') %}
+                [<a href="{% url 'animatronic_delete' anim.id %}">Delete</a>]
+            {% endif %}
+        </li>
+    {% empty %}
+        <!-- Mostrar si no hay animatrónicos -->
+        <li>No animatronics yet.</li>
+    {% endfor %}
+</ul>
+
+<!-- Crear animatrónico solo si tiene permiso add -->
+{% if user.has_perm('freddyapp.add_animatronic') %}
+    <a href="{% url 'animatronic_new' %}">New animatronic</a>
+{% endif %}
+{% endblock %}
