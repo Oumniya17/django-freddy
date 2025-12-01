@@ -1,34 +1,41 @@
 {% extends 'freddyapp/base.html' %}
-
 {% block content %}
-<!-- Página principal: lista de animatrónicos -->
+
+<!-- Título principal de la página -->
 <h1>Welcome to Freddy Fazbear's Pizza</h1>
 
 <ul>
+    <!-- Recorremos la lista de animatrónicos enviada desde la vista -->
     {% for anim in animatronics %}
         <li>
-            {{ anim.name }}
 
-            <!-- Enlace para ver detalles (requiere login) -->
+            <!-- Nombre y tipo de animatrónico (muestra el texto de la elección) -->
+            {{ anim.name }} ({{ anim.get_animal_display }})
+
+            <!-- Enlace para ver detalles, accesible a cualquier usuario -->
             [<a href="{% url 'animatronic_view' anim.id %}">View</a>]
 
-            <!-- Mostrar Edit/Delete solo si el usuario tiene permisos -->
-            {% if user.has_perm('freddyapp.change_animatronic') %}
+            <!-- Mostrar opción Edit solo si el usuario tiene permiso de edición -->
+            {% if perms.freddyapp.change_animatronic %}
                 [<a href="{% url 'animatronic_edit' anim.id %}">Edit</a>]
             {% endif %}
 
-            {% if user.has_perm('freddyapp.delete_animatronic') %}
+            <!-- Mostrar opción Delete solo si el usuario tiene permiso de borrado -->
+            {% if perms.freddyapp.delete_animatronic %}
                 [<a href="{% url 'animatronic_delete' anim.id %}">Delete</a>]
             {% endif %}
+
         </li>
+
     {% empty %}
-        <!-- Mostrar si no hay animatrónicos -->
+        <!-- Se muestra si no hay animatrónicos en la base de datos -->
         <li>No animatronics yet.</li>
     {% endfor %}
 </ul>
 
-<!-- Crear animatrónico solo si tiene permiso add -->
-{% if user.has_perm('freddyapp.add_animatronic') %}
+<!-- Mostrar botón de creación solo si el usuario tiene permiso add -->
+{% if perms.freddyapp.add_animatronic %}
     <a href="{% url 'animatronic_new' %}">New animatronic</a>
 {% endif %}
+
 {% endblock %}
