@@ -68,3 +68,6 @@ LOGIN_URL = "/freddyapp/login"
 
 # Página a la que se redirige tras iniciar sesión
 LOGIN_REDIRECT_URL = "/freddyapp/list"
+
+# Redirige al usuario a la lista tras cerrar sesión 
+LOGOUT_REDIRECT_URL = '/freddyapp/list'

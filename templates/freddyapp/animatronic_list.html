@@ -9,11 +9,13 @@
     {% for anim in animatronics %}
         <li>
 
-            <!-- Nombre y tipo de animatrónico (muestra el texto de la elección) -->
+            <!-- Nombre y tipo de animatrónico -->
             {{ anim.name }} ({{ anim.get_animal_display }})
 
-            <!-- Enlace para ver detalles, accesible a cualquier usuario -->
-            [<a href="{% url 'animatronic_view' anim.id %}">View</a>]
+            <!-- Enlace para ver detalles, solo visible si el usuario está autenticado -->
+            {% if user.is_authenticated %}
+                [<a href="{% url 'animatronic_view' anim.id %}">View</a>]
+            {% endif %}
 
             <!-- Mostrar opción Edit solo si el usuario tiene permiso de edición -->
             {% if perms.freddyapp.change_animatronic %}
@@ -33,7 +35,7 @@
     {% endfor %}
 </ul>
 
-<!-- Mostrar botón de creación solo si el usuario tiene permiso add -->
+<!-- Mostrar botón de creación solo si el usuario tiene permiso de creación -->
 {% if perms.freddyapp.add_animatronic %}
     <a href="{% url 'animatronic_new' %}">New animatronic</a>
 {% endif %}
