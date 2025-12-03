@@ -50,10 +50,26 @@ A continuación se muestran todas las funcionalidades principales del sistema, a
 
 Ruta: `/freddyapp/list`
 
+### <div align="center"> <strong> -> Usuario sin iniciar sesión</strong></div>
+Solo puede ver la lista básica, sin accesos a detalles ni acciones.
+
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/75327b8e-64b9-469e-8423-96d6ee90df3c" width="800">
+  <img src="https://github.com/user-attachments/assets/908c1ff8-2719-4b12-8aa2-c2b1cc6872a4" width="800">
 </p>
 
+### <div align="center"> <strong> -> Usuario Administrador (Staff)</strong></div>
+Tiene acceso completo: View, Edit, Delete y Create.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/5d14e7f3-dd04-4172-be75-4f59d49449cf" width="800">
+</p>
+
+### <div align="center"> <strong> -> Usuario Cliente (Permisos Limitados)</strong></div>
+Puede ver detalles, pero NO editar, crear ni borrar.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/71e8d71b-a392-4ec6-b7a3-90ed6f21b7c7" width="800">
+</p>
 
 
 ## 🔍 **Inside the Animatronic (Detalles)**
@@ -133,7 +149,7 @@ El sistema permite cambiar entre modo claro y oscuro:
 * Volver al modo claro → `/freddyapp/clearcookies`
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/b5f215a8-4fd1-4abc-80a4-3f27c420a840" width="800">
+  <img src="https://github.com/user-attachments/assets/4f786ae6-fa01-4f23-9b8a-78d516eb7e8e" width="800">
 </p>
 
 ---
@@ -214,3 +230,4 @@ Un sistema **vivo**, construido con estilo, propósito y visión.
 <div align="center"> <strong>Gracias por llegar hasta aquí.<br> El escenario se apaga… pero el sistema sigue vivo.</strong> </div>
 
 ---
+
